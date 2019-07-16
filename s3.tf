@@ -1,9 +1,11 @@
-resource "random_id" "my_s3" {
-  byte_length = 16
+resource "random_string" "my_s3" {
+  length  = 16
+  special = false
+  upper   = false
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "${var.name}-${random_id.my_s3.b64_std}"
+  bucket = "${var.name}-${random_string.my_s3.result}"
   acl    = "private"
 
   versioning {
@@ -44,4 +46,6 @@ resource "aws_s3_bucket_object" "content" {
   etag   = "${md5(file(data.archive_file.zip.output_path))}"
 }
 
-»
+output "my_bucket" {
+  value = "${aws_s3_bucket.bucket.arn}"
+}
