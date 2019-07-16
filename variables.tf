@@ -122,22 +122,12 @@ variable "install_packages" {
 
 variable "nginx_httpport" {
   description = "nginx listen port"
-  default     = 80
+  default     = 8080
 }
 
 variable "myapp_release_version" {
   description = "Release version tag (e.g. 0.1.0, 0.1.0-rc1, 0.1.0-beta1, 0.1.0-dev1), defaults to \"0.1.0\", view releases at https://github.com/hashicorp/guides-configuration#hashistack-version-tables"
   default     = "0.1.0"
-}
-
-variable "myapp_os" {
-  description = "Operating System (e.g. RHEL or Ubuntu), defaults to \"RHEL\"."
-  default     = "RHEL"
-}
-
-variable "myapp_os_version" {
-  description = "Operating System version (e.g. 7.3 for RHEL or 16.04 for Ubuntu), defaults to \"7.3\"."
-  default     = "7.3"
 }
 
 variable "myapp_public" {
