@@ -119,7 +119,7 @@ module "myapp_lb_aws" {
   #source = "github.com/hashicorp-modules/consul-lb-aws"
   #source = "../aws-lb"
   #source = "../../tf_module_aws_lb"
-  source = "github.com/ppresto/tf_module_aws_lb"
+  source = "github.com/ppresto/tf_module_aws_lb?ref=v1.0"
 
   create             = "${var.myapp_create}"
   name               = "${var.name}"
@@ -127,6 +127,8 @@ module "myapp_lb_aws" {
   cidr_blocks        = ["${var.myapp_public ? "0.0.0.0/0" : var.vpc_cidr}"]                                                                                     # If there's a public IP, open port 22 for public access - DO NOT DO THIS IN PROD
   subnet_ids         = ["${split(",", var.myapp_public ? join(",", module.network_aws.subnet_public_ids) : join(",", module.network_aws.subnet_private_ids))}"]
   is_internal_lb     = "${!var.myapp_public}"
+  lb_listen_port     = "${var.nginx_httpport}"
+  lb_target_port     = "${var.nginx_httpport}"
   use_lb_cert        = "${var.use_lb_cert}"
   lb_cert            = "${var.lb_cert}"
   lb_private_key     = "${var.lb_private_key}"
@@ -153,7 +155,7 @@ resource "aws_autoscaling_group" "myapp" {
 
   target_group_arns = ["${compact(concat(
     list(
-      module.myapp_lb_aws.myapp_tg_http_80_arn,
+      module.myapp_lb_aws.myapp_tg_http_arn,
     ),
     var.target_groups
   ))}"]

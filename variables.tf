@@ -122,7 +122,7 @@ variable "install_packages" {
 
 variable "nginx_httpport" {
   description = "nginx listen port"
-  default     = 80
+  default     = 8080
 }
 
 variable "myapp_release_version" {
