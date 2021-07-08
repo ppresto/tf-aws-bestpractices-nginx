@@ -130,16 +130,6 @@ variable "myapp_release_version" {
   default     = "0.1.0"
 }
 
-variable "myapp_os" {
-  description = "Operating System (e.g. RHEL or Ubuntu), defaults to \"RHEL\"."
-  default     = "RHEL"
-}
-
-variable "myapp_os_version" {
-  description = "Operating System version (e.g. 7.3 for RHEL or 16.04 for Ubuntu), defaults to \"7.3\"."
-  default     = "7.3"
-}
-
 variable "myapp_public" {
   description = "Open up nodes to the public internet for easy access - DO NOT DO THIS IN PROD, defaults to false."
   default     = true
